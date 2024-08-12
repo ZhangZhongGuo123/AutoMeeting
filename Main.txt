@@ -1,0 +1,33 @@
+SET Process TO $'''Nothing'''
+SET Process TO $'''Writing variables'''
+Variables.CreateNewDatatable InputTable: { ^['Hour', 'Minute', 'Type'], [20, 29, $'''S'''], [20, 31, $'''C'''], [20, 32, $'''O'''], [20, 33, $'''F'''] } DataTable=> Data
+SET ID TO $'''225-478-017'''
+SET MeetingPath TO $'''C:\\Program Files\\Tencent\\WeMeet\\WeMeetApp.exe'''
+SET VirtualCameraPath TO $'''C:\\Program Files\\obs-studio\\bin\\64bit'''
+SET Process TO $'''Killing Processes'''
+CALL Finish
+LOOP WHILE (1) = (1)
+    SET Process TO $'''Getting Time'''
+    DateTime.GetCurrentDateTime.Windows DateTimeFormat: DateTime.DateTimeFormat.DateAndTime TimeZoneLocation: DateTime.TimeZoneLocation.ChinaStandardTime CurrentDateTime=> Now
+    ON ERROR
+        REPEAT ACTION
+    END
+    LOOP FOREACH item IN Data
+        IF Now.Hour = item['Hour'] THEN
+            IF Now.Minute = item['Minute'] THEN
+                SWITCH item['Type']
+                    CASE = $'''S'''
+                        CALL Start
+                    CASE = $'''O'''
+                        CALL Open
+                    CASE = $'''C'''
+                        CALL Close
+                    CASE = $'''F'''
+                        CALL Finish
+                    DEFAULT
+                END
+            END
+        END
+    END
+    WAIT 10
+END

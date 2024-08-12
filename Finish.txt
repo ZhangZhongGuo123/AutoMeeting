@@ -1,0 +1,3 @@
+System.TerminateProcess.TerminateProcessByName ProcessName: $'''wemeetapp'''
+System.TerminateProcess.TerminateProcessByName ProcessName: $'''obs64'''
+SET Process TO $'''Done'''
